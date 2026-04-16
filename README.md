@@ -94,7 +94,7 @@ MaxSim 是 ColBERT 计算“查询”和“文档”相关性的方式。
 这是 MaxSim 与传统余弦相似度（Cosine Similarity）最大的数学区别。
 
 - **非对称性：** `MaxSim(Q,D)≠MaxSim(D,Q)`。
-- **原因：**计算 `MaxSim(Q,D)MaxSim(Q,D)` 时，分数是由**查询中的单词数量**决定的（比如图中查询 3 个词，就加总 3 个分）。计算 `MaxSim(D,Q)` 时，分数是由**文档中的单词数量**决定的（图中文档 5 个词，就加总 5 个分）。
+- **原因：**计算 `MaxSim(Q,D)` 时，分数是由**查询中的单词数量**决定的（比如图中查询 3 个词，就加总 3 个分）。计算 `MaxSim(D,Q)` 时，分数是由**文档中的单词数量**决定的（图中文档 5 个词，就加总 5 个分）。
 - **结论：** 谁是“提问者”，谁是“被检索者”，结果是不一样的。在 RAG 中，我们永远是以查询（Q）去匹配文档（D）。
 
 ### 3. 技术挑战：无法直接使用 HNSW
@@ -211,8 +211,8 @@ ColBERT 存储同一个文档所需的空间是传统单向量模型的 **80 多
 
 ColPali 同时接收两种不同形式的输入：
 
-- **左侧：图像路径 (Image Path)****Vision Transformer (ViT)：** 图像（如 PDF 的页面截图）被切成许多小方块（Patches），通过视觉 Transformer 进行特征提取。**Linear Projection (线性投影)：** 将视觉特征的维度进行调整，使其能够与语言模型的空间对齐。
-- **右侧：文本路径 (Text Path)****Tokenizer (分词器)：** 将文本（如用户的提问）切分成词元（Tokens）。
+- **左侧：图像路径 (Image Path)** Vision Transformer (ViT)： 图像（如 PDF 的页面截图）被切成许多小方块（Patches），通过视觉 Transformer 进行特征提取。**Linear Projection (线性投影)：** 将视觉特征的维度进行调整，使其能够与语言模型的空间对齐。
+- **右侧：文本路径 (Text Path)** Tokenizer (分词器)： 将文本（如用户的提问）切分成词元（Tokens）。
 
 ### 2. 核心：视觉语言模型 (VLM Core)
 
